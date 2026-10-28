@@ -6,8 +6,8 @@ if (!globalThis.crypto) globalThis.crypto=webcrypto
 const token='A'.repeat(43)
 let removed=false
 const db={prepare(sql){
- if(sql.includes('FROM sessions'))return {bind(){return {first:async()=>({id:'acc',display_name:'QA'})}}}
  if(sql.startsWith('DELETE FROM sessions'))return {bind(hash,id){assert.equal(id,'acc');assert.match(hash,/^[0-9a-f]{64}$/);return {run:async()=>{removed=true}}}}
+ if(sql.includes('FROM sessions'))return {bind(){return {first:async()=>({id:'acc',display_name:'QA'})}}}
  throw Error('unexpected SQL')
 }}
 const req=(origin,method='POST')=>new Request('https://staging.example/api/logout',{method,headers:{cookie:'__Host-pulse_session='+token,...(origin?{origin}:{})}})
