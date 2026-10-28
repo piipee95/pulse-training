@@ -59,6 +59,8 @@ function cachedDefaultLang() {
 export function effectiveLang(S, config, navLangs = browserLangs()) {
   const own = (S && typeof S.lang === 'string' && S.lang) || 'en'
   if (!S || S.langAuto !== true) return own
+  // PULSE web demo starts in Spanish; explicit language selections remain untouched.
+  if (import.meta.env?.VITE_DEMO === '1' && !import.meta.env?.VITE_MOBILE) return 'es'
   let cfg = config
   if (!cfg) {
     const seen = cachedDefaultLang()
