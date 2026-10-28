@@ -733,6 +733,28 @@ function ExerciseBlock({ entryIdx, compact, dense, editing, onToggle, onToggleSi
     </div>}
     {entry.note && <div className="exnote">{entry.note}</div>}
     {planLine}
+    {!editing && !cardio && <label className="small dim" style={{ display: 'block', marginBottom: 8 }}>
+      Variante de equipamiento (para comparar cargas)
+      <input
+        type="text"
+        aria-label="Variante de equipamiento PULSE"
+        placeholder="Ej.: barra olímpica, máquina A, mancuernas"
+        value={entry.equipmentVariantKey || ''}
+        maxLength={80}
+        autoComplete="off"
+        onChange={ev => {
+          const key = ev.target.value
+          update(state => {
+            const current = state.active?.entries?.[entryIdx]
+            if (!current || current.id !== entry.id) return
+            if (key.trim()) current.equipmentVariantKey = key
+            else delete current.equipmentVariantKey
+          }, true)
+        }}
+        style={{ display: 'block', width: '100%', marginTop: 4 }}
+      />
+      <span style={{ display: 'block', marginTop: 4 }}>Opcional. Usa siempre el mismo nombre para la misma máquina o variante. No se modifican tus cargas.</span>
+    </label>}
     {refLine}
     {guidance && onProgressionSettings && <button type="button" className={'progline' + (plan.kind === 'deload' ? ' warn' : '')}
       aria-label={t('Open exercise settings')} onClick={onProgressionSettings}>
