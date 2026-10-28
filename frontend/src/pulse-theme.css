@@ -5,7 +5,7 @@
  * Brand palette is provisional pending visual/accessibility QA.
  */
 
-:root {
+:root.pulse-web {
   --pulse-carbon: #11151b;
   --pulse-slate: #222a34;
   --pulse-volt: #b8f255;
@@ -25,7 +25,7 @@
   --sep-op: rgba(170, 187, 206, .18);
 }
 
-:root[data-theme="light"] {
+:root.pulse-web[data-theme="light"] {
   --bg: var(--pulse-cloud);
   --bg-el: #eaf0f4;
   --surface: #ffffff;
@@ -42,14 +42,14 @@
 /* Apply increased contrast to PULSE neutrals without overriding the upstream
  * accent palette (which separately adjusts for contrast and user preference). */
 @media (prefers-contrast: more) {
-  :root {
+  :root.pulse-web {
     --label-2: #e3eaf2;
     --label-3: #c7d0dc;
     --label-4: #aab6c5;
     --sep: rgba(225, 235, 247, .70);
     --sep-op: rgba(225, 235, 247, .50);
   }
-  :root[data-theme="light"] {
+  :root.pulse-web[data-theme="light"] {
     --label-2: #253544;
     --label-3: #354759;
     --label-4: #45586a;
