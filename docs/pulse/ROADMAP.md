@@ -1,4 +1,4 @@
-# PULSE — Delivery roadmap and gates
+# PULSE Train — Delivery roadmap and gates
 Status: planned; V0.1–V0.8.1 functionally approved; dates and estimates deliberately not promised.
 
 ## Foundation / V0.9
@@ -10,7 +10,7 @@ Status: planned; V0.1–V0.8.1 functionally approved; dates and estimates delibe
 - [ ] Verify documents and submit documentation-only PR for review.
 **Done when:** requirements traceable, risks classified, no app code modified, documentation PR reviewed.
 
-## V1 — Mobile-first core
+## V1 — Mobile-first responsive web core
 - [ ] Review and adapt existing component tokens and layout; dark and light themes.
 - [ ] One-handed set logging, pre-filled previous set, timer, offline recovery.
 - [ ] Verify 320px through desktop layouts, keyboard and accessibility.
@@ -33,7 +33,7 @@ Status: planned; V0.1–V0.8.1 functionally approved; dates and estimates delibe
 - [ ] Safe copy/share routines without personal loads, optional activity feed.
 - [ ] Authorization and privacy revocation tests.
 
-## V5 — Production release
+## V5 — Web production release
 - [ ] Platform/device QA, compatibility and performance.
 - [ ] Source/media license compliance, notices and source availability.
 - [ ] CI, deployment and rollback verification.
