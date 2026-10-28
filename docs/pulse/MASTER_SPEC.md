@@ -1,4 +1,4 @@
-# PULSE Training — Master Product Specification
+# PULSE Train — Master Product Specification
 
 **Document:** PULSE-MASTER-SPEC | **Version:** V0.9 draft 1 | **Date:** 2026-10-28
 **Status:** Functional baseline V0.1–V0.8.1 approved; technical implementation pending.
@@ -6,7 +6,7 @@
 **Upstream:** https://github.com/DuarteSantos8/openGym
 
 ## 1. Purpose and product boundaries
-PULSE Training is an open-source, mobile-first, multi-user fitness platform derived from openGym. Its distinctive experience combines structured workout logging with context-aware, explainable, user-approved suggestions during each set. Desktop and tablet remain fully supported.
+PULSE Train is an open-source, web-first (mobile-first responsive), multi-user fitness platform derived from openGym. Its distinctive experience combines structured workout logging with context-aware, explainable, user-approved suggestions during each set. Desktop and tablet remain fully supported. Initial deliverable: responsive web app/PWA; Android/iOS store packaging deferred.
 
 This document describes **requirements**, not functionality already implemented in the fork. The fork initially retains upstream code; no PULSE feature is implied to exist until demonstrated by tests and reviewed code.
 
@@ -19,7 +19,7 @@ This document describes **requirements**, not functionality already implemented 
 - Default sports privacy: profile visible to accepted friends; routine sharing enabled; activity sharing enabled; weights/load sharing disabled. Explicit permission governs each audience and field.
 - Friends, private groups, copied shared routine templates, optional activity feed and challenges are staged after the secure training core.
 - Admin tooling manages accounts, moderation, platform configuration, audits and health; admin rights do not automatically permit browsing private workouts.
-- UX direction: **mobile-first**; dark theme by default plus full light theme; provisional name PULSE, Carbon/Volt palette. Naming and trademark availability remain unverified.
+- UX direction: **mobile-first**; dark theme by default plus full light theme; product name PULSE Train, Carbon/Volt palette. Naming and trademark availability remain unverified.
 - Preserve upstream functionality, attribution, license obligations and synchronization/offline behavior. Minimize new dependencies, avoid paid APIs as requirements.
 
 ## 3. Canonical workout experience
