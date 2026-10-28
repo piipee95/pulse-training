@@ -22,7 +22,7 @@ La API actual usa `node:fs`, escrituras durables y `db.json`. Workers ofrece sis
 
 ## Estado operativo
 
-Se encontró cf CLI 0.15.0, sin sesión autenticada. No se verificó la configuración remota de Pages, variables ni despliegues desde esta herramienta. La web oficial y la conexión a main se mantienen como requisitos del usuario hasta obtener evidencia remota. La CLI instalada no ofrece `cf cli search`; consultar `cf pages --help` y los subcomandos disponibles en esa versión.
+Se verificó con cf CLI 0.15.0 la sesión real autenticada y el proyecto remoto `pulse-train`: origen GitHub `piipee95/pulse-training`, producción desde `main`, raíz `frontend`, salida `dist` y `VITE_DEMO=1`. La consulta inicial dentro del perfil aislado carecía de sesión; la verificación posterior usó el perfil real. La CLI instalada no ofrece `cf cli search`; consultar `cf pages --help` y los subcomandos disponibles en esa versión.
 
 ## Fuentes primarias consultadas
 

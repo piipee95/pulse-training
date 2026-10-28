@@ -15,8 +15,8 @@
 - Pruebas posteriores específicas de PWA, CSP, watchdog, store/importación e identidad aprobadas. Consultar CI del commit final para el resultado integral.
 - Inicio revisado en navegador a 390×844, 768×1024 y 1440×900 sin desbordamiento horizontal; cambio a inglés y persistencia tras recarga comprobados, y regreso manual a español.
 - No se ha verificado instalación real en teléfono, actualización de una instalación antigua, funcionamiento autenticado ni aislamiento de cuentas web.
-- El bot CLA solicita firma del titular. No se firma automáticamente ni se elimina el control para desbloquear la entrega.
-- cf CLI disponible pero sin sesión; configuración/despliegue remoto pendientes de verificación autenticada.
+- El control CLA más reciente del commit 3352fbab1 terminó aprobado. No se firmó automáticamente ni se eliminó el control; se verificó el resultado del bot.
+- Configuración de Pages comprobada con cf CLI autenticado: producción main, repositorio correcto y VITE_DEMO=1. Falta comprobar el despliegue de producción del commit integrado.
 - Auditoría histórica: el documento de una revisión anterior de esta rama contenía términos de la rutina personal. El borrado del texto en HEAD no lo elimina de commits anteriores. No reescribir historial ni eliminar Issues sin un plan y autorización específicos; revisar exposición histórica por separado, sin volver a reproducir datos personales en el PR.
 
 ## Objetivo de la entrega

@@ -3,8 +3,13 @@ import { useStore } from '../store/useStore.js'
 import { EXIDX } from '../lib/exercises.js'
 import { readPrivatePlan, previewPrivatePlan, commitPrivatePlan, privateContext } from '../lib/private-plan.js'
 
-const context = () => ({ hostname: location.hostname, user: useStore.getState().user,
-  remote: useStore.getState().sync?.server || localStorage.getItem('gym_owner'), demo: import.meta.env.VITE_DEMO === '1' })
+const context = () => {
+  const state = useStore.getState()
+  return { hostname: location.hostname, user: state.user,
+    // Web guests still carry their same-origin base URL; that is not a remote pairing.
+    remote: (state.sync?.server && state.sync.server !== location.origin) || localStorage.getItem('gym_owner'),
+    demo: import.meta.env.VITE_DEMO === '1' }
+}
 
 export default function PrivatePlanImport() {
   const [preview, setPreview] = useState(null)
