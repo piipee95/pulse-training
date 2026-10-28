@@ -1,0 +1,37 @@
+/* PULSE Train — web-only workout ergonomics, preserves upstream set controls.
+ * This stylesheet does not alter grid structure, input value logic or native apps.
+ */
+.pulse-web .setrow,
+.pulse-web .setrow-side {
+  min-width: 0;
+}
+.pulse-web .setrow .stp,
+.pulse-web .setrow-side .stp {
+  border: 1px solid var(--sep-op);
+  border-radius: 11px;
+}
+.pulse-web .setrow .stp:focus-within,
+.pulse-web .setrow-side .stp:focus-within {
+  border-color: var(--acc);
+  outline: 2px solid var(--acc-line);
+  outline-offset: 1px;
+}
+.pulse-web .setrow .stp .num,
+.pulse-web .setrow-side .stp .num {
+  font-variant-numeric: tabular-nums;
+}
+.pulse-web .setrow .stp button:focus-visible,
+.pulse-web .setrow-side .stp button:focus-visible,
+.pulse-web .setrow .n:focus-visible {
+  outline: 2px solid var(--acc);
+  outline-offset: -2px;
+}
+@media (max-width: 390px) {
+  .pulse-web .setrow { gap: 5px; }
+  .pulse-web .setrow .stp,
+  .pulse-web .setrow-side .stp { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-web .setrow .stp button,
+  .pulse-web .setrow-side .stp button { transition: none; }
+}
