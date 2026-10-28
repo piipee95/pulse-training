@@ -13,18 +13,12 @@ Una única rama, un único PR y una única web pública de demostración, con id
 - Probar instalación PWA, cache, tema claro y oscuro, nombre visible e iconos 16/32/180/192/512.
 - Mantener atribuciones legales del proyecto derivado de openGym en documentos de licencia.
 
-## Rutina personal: NO confundir con starter global
-Registros previos muestran que el usuario ha iterado distintas divisiones. Una planificación aprobada con claridad el 24 de agosto fue rotación:
-1. Upper A — pecho dominante + espalda + deltoides lateral + tríceps.
-2. Lower B — cuádriceps + femoral + pantorrilla + zona media.
-3. Upper C — espalda dominante + pecho + deltoides posterior/lateral + bíceps.
-4. Lower D — cadena posterior + cuádriceps + pantorrilla + zona media.
-
-La preferencia posterior de sesiones por músculos (espalda/tríceps, pecho/bíceps/hombro, hombros complementarios, piernas) existe como otra referencia, **no se debe asumir que es el último plan confirmado**. El usuario también mencionó semanas alternadas de cuatro y cinco sesiones. Recuperar y conciliar el plan más reciente antes de registrar ejercicios. Es obligatorio preservar el historial verdadero; no fabricar sets.
-
-**Objetivo:** hipertrofia; énfasis en pecho superior, dorsales y deltoides; técnica como prioridad. Parámetros de referencia históricos del plan Upper/Lower: compuestos 5–10 repeticiones, accesorios 10–20, 1–3 RIR, descansos largos 2.5–4 min y accesorios 1–2 min. Deben revisarse frente al plan actual antes de aplicarlos a ejercicios concretos.
-
-**Disponibilidad de equipos:** gimnasio comercial completo, máquinas selectorizadas, poleas, bancos, barra, discos, mancuernas y prensas. No limitar la selección a un gimnasio doméstico.
+## Rutina privada — requisitos, no datos personales
+- La planificación vigente debe recuperarse de la fuente autorizada y mantenerse en almacenamiento privado del usuario.
+- No publicar nombres personales, registros, cargas, historial, notas ni datos de salud en GitHub, Issues, demostraciones o archivos del catálogo.
+- Permitir equipamiento habitual de un gimnasio comercial, sin establecer limitaciones artificiales.
+- Cualquier discrepancia entre versiones históricas debe resolverse fuera del repositorio público, antes de la importación.
+- No guardar una plantilla global basada en datos de una sola persona.
 
 ### Importación segura
 - Nunca modificar `demoSeed.js` ni exponer datos personales en la demo pública.
