@@ -1,0 +1,21 @@
+name: PULSE Account POC
+on:
+  push:
+    paths:
+      - 'cloudflare/account-poc/**'
+      - '.github/workflows/pulse-account-poc.yml'
+  pull_request:
+    paths:
+      - 'cloudflare/account-poc/**'
+      - '.github/workflows/pulse-account-poc.yml'
+jobs:
+  account-security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run isolated account security tests
+        working-directory: cloudflare/account-poc
+        run: npm test
