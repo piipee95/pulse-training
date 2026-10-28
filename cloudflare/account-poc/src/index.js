@@ -29,12 +29,24 @@ export default {
     const isHealth=pathname==='/health' && request.method==='GET'
     const isMe=pathname==='/api/me' && request.method==='GET'
     const isProfile=pathname==='/api/profile' && request.method==='GET'
-    if(!isHealth&&!isMe&&!isProfile)return json({error:'not-found'},404)
+    const isLogout=pathname==='/api/logout' && request.method==='POST'
+    if(!isHealth&&!isMe&&!isProfile&&!isLogout)return json({error:'not-found'},404)
     if(!env.DB)return unavailable()
     try {
       if(isHealth) {
         const row=await env.DB.prepare('SELECT 1 AS alive').first()
         return row?.alive===1?json({status:'ok'}):unavailable()
+      }
+      if(isLogout) {
+        const origin=request.headers.get('origin')
+        if(!origin || origin!==new URL(request.url).origin)return json({error:'forbidden'},403)
+        const token=sessionToken(request)
+        if(!token)return unauthorized()
+        const user=await identity(request,env.DB)
+        if(!user)return unauthorized()
+        const hashed=await hashToken(token)
+        await env.DB.prepare('DELETE FROM sessions WHERE token_hash=? AND account_id=?').bind(hashed,user.id).run()
+        return json({ok:true},200,{'set-cookie':'__Host-pulse_session=; Path=/; Secure; HttpOnly; SameSite=Strict; Max-Age=0'})
       }
       const user=await identity(request,env.DB)
       if(!user)return unauthorized()
