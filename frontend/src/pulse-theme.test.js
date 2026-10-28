@@ -34,8 +34,10 @@ describe('PULSE Train web theme foundation', () => {
   ])('%s primary text has WCAG AA contrast', (_, selector, background, foreground) => {
     const rules = block(selector)
     expect(rules.length).toBeGreaterThan(30)
-    const bg = selector.includes('light') ? token(rules, '--bg') : token(rules, '--pulse-carbon')
-    const fg = selector.includes('light') ? token(rules, '--label') : token(rules, '--pulse-cloud')
+    const brand = block(':root.pulse-web')
+    const resolve = value => value.startsWith('var(') ? token(brand, value.slice(4, -1)) : value
+    const bg = resolve(token(rules, '--bg'))
+    const fg = resolve(token(rules, '--label'))
     expect(bg).toBe(background)
     expect(fg).toBe(foreground)
     expect(contrast(bg, fg)).toBeGreaterThanOrEqual(4.5)
