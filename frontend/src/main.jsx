@@ -2,6 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { MOBILE } from './lib/mobile.js'
+// Scope PULSE web branding; preserve Capacitor native appearance until its own QA.
+if (!MOBILE) document.documentElement.classList.add('pulse-web')
 import { useStore } from './store/useStore.js'
 import { startMediaSync } from './lib/media-sync.js'
 import { startNativeKeyboard } from './lib/native-keyboard.js'
