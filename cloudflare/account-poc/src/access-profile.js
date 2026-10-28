@@ -42,11 +42,17 @@ export default {
    const now=Math.floor(Date.now()/1000)
    // Account auto-provisioning is restricted to the email in Cloudflare Access identity.
    await env.DB.prepare('INSERT OR IGNORE INTO accounts(id,display_name,created_at) VALUES(?,?,?)').bind(user.id,'PULSE',now).run()
-   const result=await env.DB.prepare(`INSERT INTO training_profiles(account_id,revision,data_json,updated_at)
-      SELECT ?,1,?,? WHERE ?=0 AND NOT EXISTS(SELECT 1 FROM training_profiles WHERE account_id=?)
-      ON CONFLICT(account_id) DO UPDATE SET revision=training_profiles.revision+1,data_json=excluded.data_json,updated_at=excluded.updated_at
-      WHERE training_profiles.revision=? RETURNING revision`)
-      .bind(user.id,data,now,payload.revision,user.id,payload.revision).first()
+   let result
+   if(payload.revision===0) {
+     // First writer wins; a repeated creation cannot overwrite an existing profile.
+     result=await env.DB.prepare(`INSERT OR IGNORE INTO training_profiles(account_id,revision,data_json,updated_at) VALUES(?,1,?,?) RETURNING revision`)
+       .bind(user.id,data,now).first()
+   } else {
+     // Atomic compare-and-swap preserves concurrent updates across devices.
+     result=await env.DB.prepare(`UPDATE training_profiles SET revision=revision+1,data_json=?,updated_at=?
+       WHERE account_id=? AND revision=? RETURNING revision`)
+       .bind(data,now,user.id,payload.revision).first()
+   }
    if(!result)return json({error:'revision-conflict'},409)
    return json({revision:result.revision})
   }catch{return json({error:'unavailable'},503)}
