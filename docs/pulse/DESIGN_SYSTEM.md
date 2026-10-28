@@ -1,5 +1,5 @@
 # PULSE — Mobile-first design system
-Status: V0.8.1 approved **design direction**, not coded. Name and logo are provisional.
+Status: V0.8.1 approved **design direction**, not coded. Product name approved as PULSE Train; visual mark and legal clearance pending.
 
 ## Brand and tokens
 Sport performance, precision, simplicity. No noisy gamification or unnecessary charts.
