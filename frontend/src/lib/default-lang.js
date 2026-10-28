@@ -58,6 +58,9 @@ function cachedDefaultLang() {
  */
 export function effectiveLang(S, config, navLangs = browserLangs()) {
   const own = (S && typeof S.lang === 'string' && S.lang) || 'en'
+  // Existing demo seed copies have no langAuto flag. Only explicit user choice
+  // (langAuto === false) overrides PULSE's Spanish-first web preview.
+  if (import.meta.env?.VITE_DEMO === '1' && !import.meta.env?.VITE_MOBILE && S?.langAuto !== false) return 'es'
   if (!S || S.langAuto !== true) return own
   let cfg = config
   if (!cfg) {

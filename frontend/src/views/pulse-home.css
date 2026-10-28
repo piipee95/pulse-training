@@ -1,0 +1,55 @@
+/* PULSE Train web home polish. Deliberately scoped: preserve openGym's
+ * layouts and native Capacitor builds, touch only the web dashboard. */
+.pulse-web .pulse-home {
+  width: 100%;
+  min-width: 0;
+}
+.pulse-web .pulse-home-header {
+  align-items: center;
+  gap: 12px;
+}
+.pulse-web .pulse-home-heading {
+  min-width: 0;
+  flex: 1;
+}
+.pulse-web .pulse-home-brand {
+  display: flex;
+  align-items: baseline;
+  gap: .45em;
+  width: fit-content;
+  margin-bottom: 7px;
+  color: var(--pulse-volt);
+  font-size: .72rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: .16em;
+}
+.pulse-web .pulse-home-brand span {
+  color: var(--label-2);
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+.pulse-web .pulse-home-heading h1 {
+  overflow-wrap: anywhere;
+  line-height: 1.17;
+}
+.pulse-web .pulse-home-today {
+  overflow: hidden;
+}
+.pulse-web .pulse-home-primary-action {
+  min-height: 68px;
+  padding-block: 12px;
+  border-radius: var(--r);
+  outline-offset: 3px;
+}
+.pulse-web .pulse-home-primary-action:focus-visible {
+  outline: 2px solid var(--acc);
+}
+@media (max-width: 380px) {
+  .pulse-web .pulse-home-header { gap: 8px; }
+  .pulse-web .pulse-home-heading h1 { font-size: clamp(1.2rem, 6vw, 1.6rem); }
+  .pulse-web .pulse-home-primary-action { min-height: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pulse-web .pulse-home-primary-action { transition: none; }
+}
