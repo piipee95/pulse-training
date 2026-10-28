@@ -108,7 +108,7 @@ export default function Home() {
   return <div className="narrow pulse-home">
     <div className="hdr pulse-home-header">
       <SeasonDeco spot="header-bats" />
-      <div className="pulse-home-heading"><div className="pulse-home-brand" aria-label="PULSE Train">PULSE <span>TRAIN</span></div><h1>{user ? t('Hi {0}', user.name) : t('Welcome!')}</h1><div className="sub">{today.toLocaleDateString(dateLocale(), { weekday: 'long', day: 'numeric', month: 'long' })}</div></div>
+      <div className="pulse-home-heading"><div className="pulse-home-brand" aria-label="PULSE Train"><img src="/pulse-icon.svg" alt="" width="24" height="24" /> PULSE <span>TRAIN</span></div><h1>{user ? t('Hi {0}', user.name) : t('Welcome!')}</h1><div className="sub">{today.toLocaleDateString(dateLocale(), { weekday: 'long', day: 'numeric', month: 'long' })}</div></div>
       <button className="iconbtn" onClick={() => nav('/settings')} aria-label={trouble ? t('Settings') + ', ' + t('Connection problem') : t('Settings')}><Icon name="gear" />{trouble && <span className="tab-dot" aria-hidden="true" />}</button>
     </div>
 
