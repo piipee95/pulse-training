@@ -70,6 +70,9 @@ export function buildCompletedWorkout(active, { end = Date.now(), prs = [], snap
   const entries = (active?.entries || []).map(entry => {
     const completed = {
       id: entry.id,
+      // Preserve only a deliberately selected equipment variant. Legacy sessions remain unchanged.
+      ...(typeof entry.equipmentVariantKey === 'string' && entry.equipmentVariantKey.trim()
+        ? { equipmentVariantKey: entry.equipmentVariantKey.trim() } : {}),
       // Only what was logged — the live-session bookkeeping on a row stays behind (finishedRow).
       sets: (entry.sets || []).map(finishedRow),
       topW: bestWeightForEntry(entry) || null,
