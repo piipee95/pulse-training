@@ -1,0 +1,59 @@
+/* PULSE Train — Web V1 visual foundation.
+ * Deliberately imported AFTER upstream index.css.
+ * Only overrides existing semantic surfaces/text tokens. No new CSS framework,
+ * no changes to per-account accent selection, persisted state or native shells.
+ * Brand palette is provisional pending visual/accessibility QA.
+ */
+
+:root {
+  --pulse-carbon: #11151b;
+  --pulse-slate: #222a34;
+  --pulse-volt: #b8f255;
+  --pulse-cloud: #f5f7f9;
+  --pulse-steel: #778397;
+
+  --bg: var(--pulse-carbon);
+  --bg-el: #192029;
+  --surface: var(--pulse-slate);
+  --surface-2: #2b3541;
+  --surface-3: #374351;
+  --label: var(--pulse-cloud);
+  --label-2: #bdc6d1;
+  --label-3: #929eac;
+  --label-4: #778397;
+  --sep: rgba(170, 187, 206, .30);
+  --sep-op: rgba(170, 187, 206, .18);
+}
+
+:root[data-theme="light"] {
+  --bg: var(--pulse-cloud);
+  --bg-el: #eaf0f4;
+  --surface: #ffffff;
+  --surface-2: #e8edf1;
+  --surface-3: #dce4ea;
+  --label: #18212b;
+  --label-2: #465767;
+  --label-3: #617182;
+  --label-4: #687786;
+  --sep: rgba(40, 57, 72, .28);
+  --sep-op: rgba(40, 57, 72, .16);
+}
+
+/* Apply increased contrast to PULSE neutrals without overriding the upstream
+ * accent palette (which separately adjusts for contrast and user preference). */
+@media (prefers-contrast: more) {
+  :root {
+    --label-2: #e3eaf2;
+    --label-3: #c7d0dc;
+    --label-4: #aab6c5;
+    --sep: rgba(225, 235, 247, .70);
+    --sep-op: rgba(225, 235, 247, .50);
+  }
+  :root[data-theme="light"] {
+    --label-2: #253544;
+    --label-3: #354759;
+    --label-4: #45586a;
+    --sep: rgba(25, 43, 59, .62);
+    --sep-op: rgba(25, 43, 59, .44);
+  }
+}
