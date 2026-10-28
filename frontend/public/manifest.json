@@ -1,12 +1,12 @@
 {
-  "name": "openGym",
-  "short_name": "openGym",
-  "description": "Personal gym & body weight tracker",
+  "name": "PULSE Train",
+  "short_name": "PULSE",
+  "description": "Entrenamiento y progreso personal",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0c0e12",
+  "background_color": "#11151b",
   "theme_color": "#0c0e12",
   "icons": [
     { "src": "icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
