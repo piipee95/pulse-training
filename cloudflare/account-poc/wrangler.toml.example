@@ -1,0 +1,11 @@
+# Copy to a private local wrangler.toml after creating a non-production D1 database.
+name = "pulse-account-poc"
+main = "src/index.js"
+compatibility_date = "2026-10-28"
+workers_dev = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pulse-account-poc"
+database_id = "REPLACE_WITH_STAGING_DATABASE_ID"
+migrations_dir = "migrations"
