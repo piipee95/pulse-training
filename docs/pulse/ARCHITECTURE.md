@@ -12,6 +12,9 @@ Source: original `docs/ARCHITECTURE.md`, `frontend/package.json`, `api/package.j
 - Existing `mcp/` provides optional assistant integration; upstream docs mention read operations AND logging via API. Audit write authorization before using.
 - Optional Coach already exists in `api/coach/` and mobile. Avoid adding a competing uncontrolled AI coach.
 
+## Scope decision: responsive web/PWA first
+The only active delivery target is the web application, optimized for phones and usable on desktop. Retain Capacitor source compatibility, but do not prioritize Android/iOS packaging or app-store releases in the current milestones.
+
 ## Architecture decision: modular extension, not a rewrite
 ```mermaid
 flowchart TB
