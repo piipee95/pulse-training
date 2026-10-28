@@ -248,7 +248,7 @@ function Schedule({ S, update, nav, mode }) {
     items: [
       ...(seq.length ? [{ icon: 'moon', label: t('Rest day'), sub: t('A day off before the next one'), onClick: () => setSeq([...seq, REST]) }] : []),
       ...S.routines.map(r => ({
-        icon: glyphOf(r.emoji), label: r.name, sub: seq.includes(r.id) ? t('Already in the loop: adds it again') : undefined, onClick: () => setSeq([...seq, r.id]),
+        icon: glyphOf(r.emoji), label: demoLabel(r.name), sub: seq.includes(r.id) ? t('Already in the loop: adds it again') : undefined, onClick: () => setSeq([...seq, r.id]),
       })),
     ],
   })
@@ -279,7 +279,7 @@ function Schedule({ S, update, nav, mode }) {
       <span className={'plan-day-n' + (d === todayDow ? ' today' : '')} aria-hidden="true">{t(DAYS[d])}</span>
       <span className={'lrow-i' + (rs.length ? '' : ' rest')}><Icon name={rs.length ? glyphOf(rs[0].emoji) : 'moon'} /></span>
       <div className="grow">
-        <div className="tt">{rs.length ? deriveSessionName(rs.map(r => r.name)) : t('Rest day')}</div>
+        <div className="tt">{rs.length ? deriveSessionName(rs.map(r => demoLabel(r.name))) : t('Rest day')}</div>
         <div className="ss">{rs.length === 1 ? exCount(rs[0].ex.length) : rs.length ? routineCount(rs.length) : t('Tap to plan something')}</div>
       </div>
       {rs.length > 0 && <MiniBodyMap routines={rs} body={S.body} />}
@@ -350,7 +350,7 @@ function Schedule({ S, update, nav, mode }) {
           // The loop's swipe is remove-only (v1.3.11): a routine is in the loop once, so there is
           // nothing to copy. The row the reorder measures is the swipe's outer element.
           const reorderProps = { 'data-reorder-row': '', style: loopReorder.rowStyle(i) }
-          const name = rest ? t('Rest day') : r?.name ?? id
+          const name = rest ? t('Rest day') : demoLabel(r?.name ?? id)
           const row = <div key={swipe ? undefined : key} {...(swipe ? {} : reorderProps)} className={'item rotation-row' + (item?.state === 'done' ? ' is-done' : '') + (rest ? ' is-rest' : '')}>
             {editing && <button className="plan-minus" aria-label={t('Remove {0}', name)} title={t('Remove')}
               onClick={() => takeOut(i)}><Icon name="minus" /></button>}
