@@ -10,7 +10,7 @@ import { hideBoot } from './boot.js'
 
 const html = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../../index.html'), 'utf8')
 const inline = [...html.matchAll(/<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1])
-const bootMarkup = html.match(/<div id="boot"[\s\S]*?<\/svg>\s*<\/div>/)[0]
+const bootMarkup = html.match(/<div id="boot"[\s\S]*?<\/div>/)[0]
 
 let added = []
 const realAdd = window.addEventListener.bind(window)
@@ -20,6 +20,7 @@ beforeEach(() => {
   // Each test runs the script afresh; its listeners are taken off again afterwards.
   vi.spyOn(window, 'addEventListener').mockImplementation((type, fn, opts) => { added.push([type, fn, opts]); realAdd(type, fn, opts) })
   document.body.innerHTML = bootMarkup + '<div id="root"></div>'
+  localStorage.setItem('gym_state_v1', JSON.stringify({ lang: 'en', langAuto: false }))
   for (const body of inline) new Function(body)()
 })
 afterEach(() => {
@@ -42,7 +43,7 @@ describe('boot watchdog', () => {
     expect(b.querySelector('svg')).toBeNull()
     expect(b.getAttribute('role')).toBe('alert')
     expect(b.hasAttribute('aria-hidden')).toBe(false)
-    expect(b.textContent).toContain('openGym could not start on this browser.')
+    expect(b.textContent).toContain('PULSE Train could not start on this browser.')
     expect(b.querySelector('code').textContent).toContain('Invalid regular expression: invalid group specifier name at media-refs-CaxawJNr.js:1')
     const reload = b.querySelector('button')
     expect(reload.textContent).toBe('Reload')
@@ -66,15 +67,15 @@ describe('boot watchdog', () => {
     window.dispatchEvent(new ErrorEvent('error', { message: "TypeError: undefined is not an object (evaluating 'a.b')", filename: 'https://gym.test/assets/x.js', lineno: 3 }))
     expect(boot().className).toBe('')
     vi.advanceTimersByTime(10000)
-    expect(boot().textContent).toContain('openGym could not start on this browser.')
+    expect(boot().textContent).toContain('PULSE Train could not start on this browser.')
     expect(boot().querySelector('code').textContent).toContain("undefined is not an object (evaluating 'a.b') at x.js:3")
   })
 
   it('says it is taking too long when nothing failed but the app never came', () => {
     vi.advanceTimersByTime(9999)
-    expect(boot().querySelector('svg')).not.toBeNull()
+    expect(boot().querySelector('img')).not.toBeNull()
     vi.advanceTimersByTime(1)
-    expect(boot().textContent).toContain('openGym is taking too long to start.')
+    expect(boot().textContent).toContain('PULSE Train is taking too long to start.')
   })
 
   it('waits for the boot screen when the failure comes before the page is there', () => {
@@ -99,5 +100,12 @@ describe('boot watchdog', () => {
     hideBoot()
     vi.advanceTimersByTime(1000)
     expect(document.getElementById('boot')).toBeNull()
+  })
+
+  it('shows Spanish recovery text for the Spanish first launch', () => {
+    document.documentElement.lang = 'es'
+    window.dispatchEvent(syntaxError())
+    expect(boot().textContent).toContain('PULSE Train no pudo terminar de iniciar.')
+    expect(boot().querySelector('button').textContent).toBe('Recargar')
   })
 })

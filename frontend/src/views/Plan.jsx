@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { demoLabel } from '../lib/demo-label.js'
 import { useNavigate } from 'react-router-dom'
 import { useStore } from '../store/useStore.js'
 import { useUI } from '../store/useUI.js'
@@ -459,14 +460,14 @@ function Routines({ S, update, nav }) {
           <div key={r.id} data-reorder-row className="item plan-routine" style={reorder.rowStyle(i)}>
             <button className="plan-minus" aria-label={t('Delete {0}', r.name)} title={t('Delete routine')} onClick={() => remove(r)}><Icon name="minus" /></button>
             <span className="lrow-i"><Icon name={glyphOf(r.emoji)} /></span>
-            <div className="grow"><div className="tt">{r.name}</div><div className="ss">{sub(r)}</div></div>
+            <div className="grow"><div className="tt">{demoLabel(r.name)}</div><div className="ss">{sub(r)}</div></div>
             {routines.length > 1 && <button className="plan-handle" aria-label={t('Move {0}', r.name)} title={t('Drag to reorder')}
               {...reorder.handle(i)}><Icon name="chevronsUpDown" /></button>}
           </div>)}</div>
         : <div className="list routine-list plan-routines">{routines.map(r => {
           const row = <div key={r.id} className="item plan-routine" {...tappable(() => nav('/plan/r/' + r.id))}>
             <span className="lrow-i"><Icon name={glyphOf(r.emoji)} /></span>
-            <div className="grow"><div className="tt">{r.name}</div><div className="ss">{sub(r)}</div></div>
+            <div className="grow"><div className="tt">{demoLabel(r.name)}</div><div className="ss">{sub(r)}</div></div>
             <MiniBodyMap routines={[r]} body={S.body} />
             <Icon name="chevronRight" className="chev" /></div>
           // Swipe (v1.3.11, Settings → Swipe actions): toward the start deletes with an Undo,

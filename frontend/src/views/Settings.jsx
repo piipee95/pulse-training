@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, forwardRef, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState, forwardRef, useSyncExternalStore, lazy, Suspense } from 'react'
+import { PRIVATE_PLAN_ENABLED } from '../lib/private-plan.js'
+const PrivatePlanImport = PRIVATE_PLAN_ENABLED ? lazy(() => import('../components/PrivatePlanImport.jsx')) : null
 import { useNavigate, useParams, useLocation, Navigate } from 'react-router-dom'
 import { useStore, DEF, hasData } from '../store/useStore.js'
 import { healthStatus, loadHealth, enableHealth, disableHealth, openHealthConnect, onHealthChange, enableRead, disableRead } from '../lib/health-sync.js'
@@ -912,6 +914,7 @@ export default function Settings({ page = null, find = null, via = null, entryKe
     </>,
 
     data: () => <>
+      {PRIVATE_PLAN_ENABLED && <Suspense fallback={null}><PrivatePlanImport /></Suspense>}
       <Section title={t('Back up')}>
         <Row icon="share" iconTint="var(--blue)" title={t('Export backup (JSON)')} subtitle={hasMedia ? t('Without photos and videos') : undefined} accessory="chevron" onClick={doExport} />
         {hasMedia && <Row icon="share" iconTint="var(--blue)" title={t('Export with photos & videos (.zip)')} accessory="chevron" onClick={doExportZip} />}
@@ -1143,7 +1146,7 @@ function SettingsRoot({ ctx, preview, open, user, sync, home, go, entryKey }) {
             value={t('Admin')} accessory="chevron" onClick={() => nav('/admin', { state: { section: 'coach' } })} className="sp-root-row" />}
         </Section>
       ))}
-      <div className="dim small sp-version">openGym v{__APP_VERSION__}</div>
+      <div className="dim small sp-version">{MOBILE ? 'openGym' : 'PULSE Train V1.1 · openGym'} v{__APP_VERSION__}</div>
     </>}
   </div>
 }

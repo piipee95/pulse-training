@@ -31,6 +31,9 @@ concurrency:
 
 jobs:
   build:
+    # PULSE Train has one official deployment, Cloudflare Pages. Preserve the upstream
+    # workflow for upstream clones without publishing a second demo from this fork.
+    if: github.repository == 'DuarteSantos8/openGym'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:

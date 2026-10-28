@@ -20,6 +20,7 @@ import { dayNoteOf } from '../lib/day-notes.js'
 import { weighInAt } from '../lib/bodyweight.js'
 import WeightRate from '../components/WeightRate.jsx'
 import { SeasonDeco } from '../components/Seasonal.jsx'
+import { demoLabel } from '../lib/demo-label.js'
 
 // Home = what to do now + a quick glance. Deep charts & history live in Stats.
 export default function Home() {
@@ -35,7 +36,7 @@ export default function Home() {
   // first, kept for the one-routine glyph. The derived session name joins them (§9).
   const todayRoutines = effectiveRoutines(S, todayISO())
   const routine = todayRoutines[0] || null
-  const todayName = todayRoutines.map(r => r.name).join(' + ')
+  const todayName = todayRoutines.map(r => demoLabel(r.name)).join(' + ')
   // A fulfilled pin (a coach session pinned to today and since done) reads as no override.
   const todayOvr = S.dayPlan[todayISO()] !== undefined && pinState(S, S.dayPlan[todayISO()]) !== 'done'
   // An open editor on a saved workout (lib/session-edit.js) holds S.active too, but it is not a
@@ -141,9 +142,9 @@ export default function Home() {
           <div style={{ minWidth: 0 }}>
             <div className="lbl2">{t('Today')}</div>
             <div className="ttl">{S.active ? (editingSaved ? S.active.name : t('{0} (in progress)', S.active.name))
-              : doneToday ? (doneToday.name ? t('{0} (done)', doneToday.name) : t('Workout done'))
+              : doneToday ? (doneToday.name ? t('{0} (done)', demoLabel(doneToday.name)) : t('Workout done'))
               : routine ? todayName : t('Rest day')}{todayOvr && routine && !doneToday ? ' · ' + t('rescheduled') : ''}</div>
-            {next && !doneToday && <div className="ss">{t('Next session: {0}, {1}', t(DAYN[next.weekday]), next.routine.name)}</div>}
+            {next && !doneToday && <div className="ss">{t('Next session: {0}, {1}', t(DAYN[next.weekday]), demoLabel(next.routine.name))}</div>}
           </div>
         </div>
         {S.active ? <span className="tag" style={{ color: 'var(--orange)', background: 'color-mix(in srgb,var(--orange) 16%,transparent)' }}>{editingSaved ? t('Edit') : t('Resume')}</span>

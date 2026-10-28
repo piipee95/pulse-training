@@ -5,6 +5,8 @@ import { MOBILE } from './lib/mobile.js'
 // Scope PULSE web branding; preserve Capacitor native appearance until its own QA.
 if (!MOBILE) document.documentElement.classList.add('pulse-web')
 import { useStore } from './store/useStore.js'
+import { setLang, baseLang } from './lib/i18n.js'
+import { effectiveLang } from './lib/default-lang.js'
 import { startMediaSync } from './lib/media-sync.js'
 import { startNativeKeyboard } from './lib/native-keyboard.js'
 // The Coach's and the admin dashboard's styles stay in the main stylesheet, in the place they
@@ -23,9 +25,11 @@ handOverFromLaunchScreen()
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode><App /></StrictMode>
-)
+// Load the selected language before React's first paint. Manual choices stay intact.
+const initial = useStore.getState().S
+const initialLang = effectiveLang(initial)
+setLang(initialLang, initial.enParens?.[baseLang(initialLang)] ?? true, initial.enOnly?.[baseLang(initialLang)] === true)
+  .then(() => createRoot(document.getElementById('root')).render(<StrictMode><App /></StrictMode>))
 
 // The photos and videos of custom exercises, in every build (the phone and the demo included):
 // uploads of what the server lacks, the local clean-up, and the plan's files kept offline.
