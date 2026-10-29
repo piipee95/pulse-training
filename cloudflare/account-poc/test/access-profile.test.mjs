@@ -6,7 +6,8 @@ if(!globalThis.crypto)globalThis.crypto=webcrypto
 const env={ACCESS_AUD:'expected-aud',ACCESS_ALLOWED_EMAIL:'owner@example.test',DB:{prepare(sql){
  if(sql.startsWith('SELECT revision'))return {bind(){return {first:async()=>null}}}
  if(sql.startsWith('INSERT OR IGNORE'))return {bind(){return {run:async()=>({})}}}
- if(sql.startsWith('INSERT OR IGNORE INTO training_profiles'))return {bind(...args){assert.match(args[0],/^access-/);return {first:async()=>({revision:1})}}}\n if(sql.startsWith('UPDATE training_profiles'))return {bind(){return {first:async()=>({revision:2})}}}
+ if(sql.startsWith('INSERT OR IGNORE INTO training_profiles'))return {bind(...args){assert.match(args[0],/^access-/);return {first:async()=>({revision:1})}}}
+ if(sql.startsWith('UPDATE training_profiles'))return {bind(){return {first:async()=>({revision:2})}}}
  throw Error('unexpected query')
 }}}
 const ctx=(email='owner@example.test',aud='expected-aud')=>({access:{aud,getIdentity:async()=>({email})}})
